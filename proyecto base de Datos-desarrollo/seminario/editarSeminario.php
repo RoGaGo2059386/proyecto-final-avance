@@ -4,7 +4,7 @@ $con = conectar();
 
 $id = $_GET['id'];
 
-$sql = "SELECT * FROM trabajadores WHERE cc='$id'";
+$sql = "SELECT * FROM seminario WHERE seminario_id='$id'";
 $query = mysqli_query($con, $sql);
 
 $row = mysqli_fetch_array($query);
@@ -25,13 +25,15 @@ $row = mysqli_fetch_array($query);
 
 <body>
     <div class="container mt-5">
-        <form action="actualizarTrabajador.php" method="POST">
+        <form action="actualizarSeminario.php" method="POST">
 
 
 
-            <input type="hidden" class="form-control mb-3" name="cc" value="<?php echo $row['cc']  ?>">
+            <input type="hidden" class="form-control mb-3" name="seminario_id" value="<?php echo $row['seminario_id']  ?>">
             <input type="text" class="form-control mb-3" name="nombre" placeholder="Nombre" value="<?php echo $row['nombre']  ?>">
-            <input type="text" class="form-control mb-3" name="cargo" placeholder="cargo" value="<?php echo $row['cargo']  ?>">
+            <textarea name="objetivo" cols="38" rows="5" placeholder="objetivo" width:600px><?php echo $row['objetivo']; ?></textarea>
+            <textarea name="descripcion" cols="38" rows="5" placeholder="descripcion" width:600px><?php echo $row['descripcion']; ?></textarea>
+            <textarea name="poblacion_dirigida" cols="38" rows="5" placeholder="poblacion_dirigida" width:600px><?php echo $row['poblacion_dirigida']; ?></textarea>
 
             <input type="submit" class="btn btn-primary btn-block" value="Actualizar">
         </form>
