@@ -10,7 +10,6 @@ $id = $_GET['id'];
 
 $sql = "SELECT * FROM historia_clinica WHERE cc='$id'";
 $query = mysqli_query($con, $sql);
-
 $row = mysqli_fetch_array($query);
 ?>
 
@@ -35,15 +34,15 @@ $row = mysqli_fetch_array($query);
 
             <select name="grupo_sanguineo">
                 <option>---grupo sanguineo---</option>
-                <option>A</option>
-                <option>B</option>
-                <option>AB</option>
-                <option>O</option>
+                <option <?php if($row['grupo_sanguineo']=="A") echo 'selected'; ?>>A</option>
+                <option <?php if($row['grupo_sanguineo']=="B") echo 'selected'; ?>>B</option>
+                <option <?php if($row['grupo_sanguineo']=="AB") echo 'selected'; ?>>AB</option>
+                <option <?php if($row['grupo_sanguineo']=="O") echo 'selected'; ?>>O</option>
             </select>
             <select name="RH">
                 <option>---factor RH---</option>
-                <option>+</option>
-                <option>-</option>
+                <option <?php if($$row['RH']=="+") echo 'selected'; ?>>+</option>
+                <option <?php if($row['RH']=="-") echo 'selected'; ?>>-</option>
             </select>
 
             <input type="submit" class="btn btn-primary btn-block" value="Actualizar">
