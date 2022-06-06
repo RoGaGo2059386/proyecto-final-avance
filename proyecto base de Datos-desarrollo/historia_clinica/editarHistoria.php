@@ -29,7 +29,8 @@ $row = mysqli_fetch_array($query);
 <body>
     <div class="container mt-5">
         <form action="actualizarHistoria.php" method="POST">
-
+        <input type="hidden" class="form-control mb-3" name="cc" value="<?php echo $row['cc']  ?>">
+            
             <textarea name="descripcion" cols="38" rows="5" placeholder="descripcion" width:600px><?php echo $row['descripcion']; ?></textarea>
 
             <select name="grupo_sanguineo">
@@ -41,7 +42,7 @@ $row = mysqli_fetch_array($query);
             </select>
             <select name="RH">
                 <option>---factor RH---</option>
-                <option <?php if($$row['RH']=="+") echo 'selected'; ?>>+</option>
+                <option <?php if($row['RH']=="+") echo 'selected'; ?>>+</option>
                 <option <?php if($row['RH']=="-") echo 'selected'; ?>>-</option>
             </select>
 

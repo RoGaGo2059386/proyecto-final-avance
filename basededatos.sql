@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-06-2022 a las 00:48:39
+-- Tiempo de generación: 06-06-2022 a las 14:58:19
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -61,8 +61,8 @@ CREATE TABLE `historia_clinica` (
 --
 
 INSERT INTO `historia_clinica` (`cc`, `descripcion`, `grupo_sanguineo`, `RH`) VALUES
-(6565656, 'Dear sir, thank you for this thorough tutorial. It helped me a lot to develop my application which is in PostgreSQL. It is basically the same just with a minor change in the dbcontroller file. Thank you so much for taking your time in doing this :D', 'AB', '-'),
-(11111111, 'asdasdasdasdasdasdasdasdasdasdasd', 'B', '-'),
+(6565656, 'Dear sir, thank you for this thorough tutorial. It helped me a lot to develop my application which is in PostgreSQL. It is basically the same just with a minor change in the dbcontroller file. Thank you so much for taking your time in doing this :D', 'A', '+'),
+(11111111, 'asdasdasdasdasdasdasdasdasdasdasd', 'AB', '+'),
 (1113688304, 'Gracias por el tutorial, me ha sido de mucha ayuda.\r\nUna pregunta que ojala alguien la responda, ¿por que cuando hay un único registro este no es visible en la pagina pero si en la base de datos con phpmyadmin? hice la prueba ingresando varios registros para luego borrarlos y dejar solo uno, cuando hago esto ese único registro no es visible en la pagina pero como ya mencioné, si es se puede ver en la base de datos.\r\n\r\n1\r\n\r\n', 'O', '-');
 
 -- --------------------------------------------------------
@@ -110,8 +110,8 @@ CREATE TABLE `prueba_covid` (
 
 INSERT INTO `prueba_covid` (`pruebaID`, `cc`, `info_prueba`, `incapacidad`, `fecha_prueba`, `fecha_sospecha`, `fecha_notificacion`, `fecha_fin_aislamiento`) VALUES
 (2, 2222222, 'sadasdhajsdhpoisah dpasoidjasiod aosijdasijdáoisdj', 'si', '2020-10-23', '2020-09-10', '2020-10-20', '2021-02-02'),
-(3, 6565656, 'adihgpiasjdhapiusdhpaiusnn poa sjdaisj. askdjasoidjasó, aspidjasoida; dasldk', 'no', '2021-09-11', '2021-08-30', '0000-00-00', '2021-11-10'),
-(4, 6565656, 'kjfbakljhfakjsfñf', '', '2021-10-10', '2021-10-01', '2021-10-20', '2021-12-10');
+(3, 6565656, 'adihgpiasjdhapiusdhpaiusnn poa sjdaisj. askdjasoidjasó, aspidjasoida; dasldk', 'si', '2021-09-11', '2021-08-30', '2021-09-02', '2021-11-10'),
+(4, 6565656, 'kjfbakljhfakjsfñf', 'no', '2021-10-10', '2021-10-01', '2021-10-20', '2021-12-10');
 
 -- --------------------------------------------------------
 
@@ -135,6 +135,27 @@ INSERT INTO `restriccion` (`resID`, `cc`, `descripcion`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `seminario`
+--
+
+CREATE TABLE `seminario` (
+  `seminario_id` int(11) NOT NULL,
+  `nombre` varchar(200) NOT NULL,
+  `objetivo` varchar(1000) NOT NULL,
+  `descripcion` varchar(1000) NOT NULL,
+  `poblacion_dirigida` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `seminario`
+--
+
+INSERT INTO `seminario` (`seminario_id`, `nombre`, `objetivo`, `descripcion`, `poblacion_dirigida`) VALUES
+(1, 'mantenimiento de aires acondicionados', 'enseñar a mantener aires acondicionados', 'dhagsdoiagsdoisagdhasuyapsuidspui iahsdasbhdpijashdpishd', 'ojasdhpaioshdpoiashd aoisdáksjdo');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `trabajadores`
 --
 
@@ -150,9 +171,30 @@ CREATE TABLE `trabajadores` (
 
 INSERT INTO `trabajadores` (`cc`, `nombre`, `cargo`) VALUES
 (2222222, 'Fernando', 'Auxiliar'),
-(6565656, 'fgfdfgdfg', 'xczxczxc'),
+(6565656, 'fgfdaaaa', 'xczxccccc'),
 (11111111, 'asdsd', 'zccxzczxc'),
-(1113688304, 'Ronaldo Garcia Gonzalez', 'Auxiliar');
+(1113688304, 'Ronaldo Garcia Gonzalez', 'Auxiliar'),
+(2121212121, 'Ricardo Hernandez', 'Seguridad');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `trabajador_seminario`
+--
+
+CREATE TABLE `trabajador_seminario` (
+  `trabajador_id` int(11) NOT NULL,
+  `seminario_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `trabajador_seminario`
+--
+
+INSERT INTO `trabajador_seminario` (`trabajador_id`, `seminario_id`) VALUES
+(2222222, 1),
+(6565656, 1),
+(1113688304, 1);
 
 --
 -- Índices para tablas volcadas
@@ -191,10 +233,23 @@ ALTER TABLE `restriccion`
   ADD KEY `restriccion_ibfk_1` (`cc`);
 
 --
+-- Indices de la tabla `seminario`
+--
+ALTER TABLE `seminario`
+  ADD PRIMARY KEY (`seminario_id`);
+
+--
 -- Indices de la tabla `trabajadores`
 --
 ALTER TABLE `trabajadores`
   ADD PRIMARY KEY (`cc`);
+
+--
+-- Indices de la tabla `trabajador_seminario`
+--
+ALTER TABLE `trabajador_seminario`
+  ADD PRIMARY KEY (`trabajador_id`,`seminario_id`),
+  ADD KEY `seminario_id` (`seminario_id`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -225,6 +280,12 @@ ALTER TABLE `restriccion`
   MODIFY `resID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `seminario`
+--
+ALTER TABLE `seminario`
+  MODIFY `seminario_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -245,6 +306,13 @@ ALTER TABLE `medicacion`
 --
 ALTER TABLE `restriccion`
   ADD CONSTRAINT `restriccion_ibfk_1` FOREIGN KEY (`cc`) REFERENCES `historia_clinica` (`cc`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `trabajador_seminario`
+--
+ALTER TABLE `trabajador_seminario`
+  ADD CONSTRAINT `trabajador_seminario_ibfk_1` FOREIGN KEY (`trabajador_id`) REFERENCES `trabajadores` (`cc`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `trabajador_seminario_ibfk_2` FOREIGN KEY (`seminario_id`) REFERENCES `seminario` (`seminario_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
